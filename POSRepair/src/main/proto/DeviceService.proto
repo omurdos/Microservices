@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_package = "com.murdos.grpc.service.device";
+
+package com.murdos.grpc;
+
+
+// The greeting service definition.
+service DeviceService {
+	// Sends a greeting
+	rpc GetDeviceDetails (DeviceRequest) returns (DeviceResponse);
+}
+
+// The request message containing the user's name.
+
+
+// The response message containing the greetings.
+message GrpcDevice {
+	string Id = 1;
+	string Manufacturer = 2;
+	string Model = 3;
+	string SerialNumber = 4;
+	string IMEI = 5;
+	bool SendToRepair = 6;
+}
+
+message DeviceRequest {
+	string Id = 1;
+}
+
+message DeviceResponse {
+	GrpcDevice Device = 1;
+}

@@ -30,7 +30,7 @@ namespace POSMS.Repositories
             return await _context.Devices.ToListAsync();
         }
 
-        public async Task<Device?> GetDeviceByIdAsync(string id)
+        public async Task<Device> GetDeviceByIdAsync(string id)
         {
             var device = await _context.Devices.FindAsync(id);
             return device;

@@ -14,8 +14,6 @@ RUN dotnet publish -c release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 EXPOSE 80
-EXPOSE 1433
 EXPOSE 9090
-EXPOSE 15672
 COPY --from=buld-env /app/out .
 ENTRYPOINT [ "dotnet" , "POSMS.dll" ]

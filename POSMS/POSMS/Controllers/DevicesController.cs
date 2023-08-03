@@ -40,7 +40,7 @@ namespace POSMS.Controllers
 
         // GET api/<DevicesController>/5
         [HttpGet("{id}", Name = "GetDeviceById")]
-        public async Task<IActionResult> GetDevice(string id)
+        public async Task<IActionResult> GetDeviceById(string id)
         {
             var device  = await _deviceRepository.GetDeviceByIdAsync(id);
             var dto = _mapper.Map<DeviceDto>(device);
@@ -55,7 +55,7 @@ namespace POSMS.Controllers
                 var device = _mapper.Map<Device>(createDeviceDto);
                 device = await _deviceRepository.AddDeviceAsync(device);
                 var dto = _mapper.Map<DeviceDto>(device);
-                return CreatedAtRoute(nameof(GetDevice), new { id = dto.Id }, dto);
+                return CreatedAtRoute(nameof(GetDeviceById), new { id = dto.Id }, dto);
             }
             return BadRequest(createDeviceDto);
         }

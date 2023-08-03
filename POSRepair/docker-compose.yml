@@ -1,0 +1,49 @@
+version: '3'
+services:
+
+  mssqldb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssqldb
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=P@ssword
+    ports:
+      - "1433:1433"
+      
+  postqresqldb:
+    image: postgres
+    container_name: postqresqldb
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=omer
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=pms
+
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbit_mq
+    ports:
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASSWORD=guest
+
+  posms-app:
+    build: 
+      context: ../POSMS/POSMS
+    container_name: posms
+    ports:
+      - "80:80"
+      - "9090:9090"
+    depends_on:
+      - mssqldb
+      
+  posrepair-app:
+    build: 
+      context: ./
+    container_name: posrepair
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postqresqldb

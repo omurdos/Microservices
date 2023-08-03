@@ -13,6 +13,4 @@ FROM unitfinance/jdk17-sbt-scala
 COPY --from=build /home/app/target/POSRepair-0.0.1-SNAPSHOT.jar /usr/local/lib/POSRepair.jar
 EXPOSE 8080
 EXPOSE 9090
-EXPOSE 15672
-EXPOSE 5432
 ENTRYPOINT ["java","-jar","/usr/local/lib/POSRepair.jar"]

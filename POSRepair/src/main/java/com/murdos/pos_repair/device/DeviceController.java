@@ -16,6 +16,6 @@ public class DeviceController {
 
     @GetMapping
     public Device getAllDevices(){
-        return deviceService.getDevice();
+        return null;
     }
 }

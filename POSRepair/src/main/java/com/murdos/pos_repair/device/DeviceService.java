@@ -17,7 +17,7 @@ public class DeviceService {
     public DeviceService(){
 
     }
-    
+
     public List<Device> getAllDevices(){
         return  deviceRepository.findAll();
     }

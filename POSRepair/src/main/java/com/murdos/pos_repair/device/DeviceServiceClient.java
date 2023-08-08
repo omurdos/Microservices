@@ -30,10 +30,11 @@ public class DeviceServiceClient {
         DeviceServiceOuterClass.DeviceRequest request
                 = DeviceServiceOuterClass.DeviceRequest.newBuilder().setId(id).build();
         DeviceServiceOuterClass.DeviceResponse response = deviceServiceBlockingStub.getDeviceDetails(request);
-        channel.shutdown();
+
         System.out.println(response.getAllFields());
         var grpcDevice = response.getDevice();
         System.out.println(grpcDevice);
+
         return new Device(grpcDevice.getId(), grpcDevice.getManufacturer(), grpcDevice.getModel(), grpcDevice.getSerialNumber(), grpcDevice.getIMEI(), grpcDevice.getSendToRepair());
     }
 }

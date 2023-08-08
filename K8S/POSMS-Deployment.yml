@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posms
+spec:
+  selector:
+    matchLabels:
+      app: posms
+  template:
+    metadata:
+      labels:
+        app: posms
+    spec:
+      containers:
+      - name: posms
+        image: omarmurdos/posms
+        ports:
+          - name: posms-port
+            containerPort: 80
+          - name: grpc-port
+            containerPort: 9090

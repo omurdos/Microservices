@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: posrepairlb
+spec:
+  type: LoadBalancer
+  selector:
+    app: posrepair
+  ports:
+  - port: 8080
+    targetPort: posrepair-port

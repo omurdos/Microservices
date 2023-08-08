@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posrepair
+spec:
+  selector:
+    matchLabels:
+      app: posrepair
+  template:
+    metadata:
+      labels:
+        app: posrepair
+    spec:
+      containers:
+      - name: posrepair
+        image: omarmurdos/posrepair
+        ports:
+          - name: posrepair-port
+            containerPort: 8080
+

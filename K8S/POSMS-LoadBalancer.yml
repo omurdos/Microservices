@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: posms-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: posms
+  ports:
+  - port: 80
+    targetPort: posms-port
+    name: http
+  - port: 9090
+    targetPort: grpc-port
+    name: grpc

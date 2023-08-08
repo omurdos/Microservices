@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: posrpdbip
+spec:
+  type: ClusterIP
+  selector:
+    app: posrpdb
+  ports:
+  - port: 5432
+    targetPort: psql-port

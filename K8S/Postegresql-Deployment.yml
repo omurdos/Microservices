@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posrpdb
+spec:
+  selector:
+    matchLabels:
+      app: posrpdb
+  template:
+    metadata:
+      labels:
+        app: posrpdb
+    spec:
+      containers:
+      - name: posrpdb
+        image: postgres
+        env:
+        - name: POSTGRES_USER
+          value: "omer"
+        - name: POSTGRES_PASSWORD
+          value: "password"
+        - name: POSTGRES_DB
+          value: "pms"
+        ports:
+          - name: psql-port
+            containerPort: 5432

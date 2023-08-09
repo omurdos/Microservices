@@ -11,8 +11,6 @@ public class DeviceService {
     @Autowired
     private DeviceRepository deviceRepository;
     @Autowired
-    private GreetingServiceClient greetingServiceClient;
-    @Autowired
     private DeviceServiceClient deviceServiceClient;
     public DeviceService(){
 

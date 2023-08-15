@@ -7,11 +7,6 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=P@ssword
-    healthcheck:
-      test:  ["CMD-SHELL", "sqlcmd -U sa -P P@ssword -Q 'SELECT 1;'"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
     ports:
       - "1433:1433"
       
@@ -48,9 +43,7 @@ services:
       - "80:80"
       - "9090:9090"
     depends_on:
-        mssqldb:
-          condition: service_healthy
-      
+      - mssqldb      
   posrepair-app:
     build: 
       context: ./POSRepair

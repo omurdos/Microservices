@@ -15,7 +15,7 @@ public class DeviceController {
     private DeviceService deviceService;
 
     @GetMapping
-    public Device getAllDevices(){
-        return null;
+    public List<Device> getAllDevices(){
+        return deviceService.getAllDevices();
     }
 }

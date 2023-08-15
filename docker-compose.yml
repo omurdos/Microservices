@@ -7,6 +7,11 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=P@ssword
+    healthcheck:
+      test:  ["CMD-SHELL", "sqlcmd -U sa -P P@ssword -Q 'SELECT 1;'"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     ports:
       - "1433:1433"
       
@@ -19,6 +24,12 @@ services:
       - POSTGRES_USER=omer
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=pms
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "pms"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
 
   rabbitmq:
     image: rabbitmq
@@ -31,19 +42,21 @@ services:
 
   posms-app:
     build: 
-      context: ../POSMS/POSMS
+      context: ./POSMS/POSMS
     container_name: posms
     ports:
       - "80:80"
       - "9090:9090"
     depends_on:
-      - mssqldb
+        mssqldb:
+          condition: service_healthy
       
   posrepair-app:
     build: 
-      context: ./
+      context: ./POSRepair
     container_name: posrepair
     ports:
       - "8080:8080"
     depends_on:
-      - postqresqldb
+        postqresqldb:
+          condition: service_healthy  
